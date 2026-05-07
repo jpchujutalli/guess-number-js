@@ -26,3 +26,31 @@ console.log('Nombre', nombreUsuario);
 console.log('Edad', edadUsuario);
 console.log(typeof edadUsuario);
 
+
+/* operadores asimetricos */
+
+let a = 20;
+let b = 7;
+
+console.log('Suma', a + b);
+console.log('Resta', a - b);
+console.log('Multiplicacion', a * b);
+console.log('Division', a / b);
+console.log('Modulo', a % b);
+
+
+console.log('5' + 3);
+console.log(5 + 3);
+console.log('5' - 3);
+
+let saludo1 = 'Hola ' + nombreUsuario + ', tienes ' + edadUsuario + 'años';
+console.log(saludo1);
+
+let saludo2 = `Hola ${nombreUsuario}, tienes ${edadUsuario} años`;
+console.log(saludo2);
+
+
+let anioActual = 2026;
+let anioNacimiento = anioActual - Number(edadUsuario);
+
+console.log(`Hola ${nombreUsuario}, naciste aproximadamente en ${anioNacimiento}`);
