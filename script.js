@@ -1,56 +1,30 @@
-let nombre = 'Jian Pierre';
-let edad = 29;
-let estaAprendiendo = true;
+// ===ADIVINA EL NUMERO ===
+// El programa genera un numero secreto entre 1 y 100
+// El jugador intenta adivinarlo
 
-console.log(nombre);
-console.log(edad);
-console.log(estaAprendiendo);
-
-console.log(typeof nombre);
-console.log(typeof edad);
-console.log(typeof estaAprendiendo);
-
-const curso = 'code 101';
-const maxIntentos = 10;
-
-console.log(curso);
-console.log(maxIntentos);
+console.log('=== ADIVINA EL NUMERO ===');
 
 
-let nombreUsuario = prompt('¿Como te llamas?');
-let edadUsuario = prompt('¿Cual es tu edad?');
+// ---Genera un numero secreto---
+const numeroSecreto = Math.floor(Math.random() * 100) +1;
 
-alert('Hola ' + nombreUsuario + ' tienes ' + edadUsuario + ' años');
-
-console.log('Nombre', nombreUsuario);
-console.log('Edad', edadUsuario);
-console.log(typeof edadUsuario);
+console.log('(DEBUG) Numero secreto: ', numeroSecreto);
 
 
-/* operadores asimetricos */
+// Pedir intento al jugador
 
-let a = 20;
-let b = 7;
+let intento = prompt('Adivina el numero (1 - 100): ');
+intento = Number(intento);
 
-console.log('Suma', a + b);
-console.log('Resta', a - b);
-console.log('Multiplicacion', a * b);
-console.log('Division', a / b);
-console.log('Modulo', a % b);
+console.log('Intento del jugador:', intento);
+console.log('Tipo:', typeof intento);
 
 
-console.log('5' + 3);
-console.log(5 + 3);
-console.log('5' - 3);
 
-let saludo1 = 'Hola ' + nombreUsuario + ', tienes ' + edadUsuario + 'años';
-console.log(saludo1);
+// Comparar intento con numero secreto 
 
-let saludo2 = `Hola ${nombreUsuario}, tienes ${edadUsuario} años`;
-console.log(saludo2);
-
-
-let anioActual = 2026;
-let anioNacimiento = anioActual - Number(edadUsuario);
-
-console.log(`Hola ${nombreUsuario}, naciste aproximadamente en ${anioNacimiento}`);
+if (intento === numeroSecreto) {
+    alert('🎉 ¡Correcto! El numero era ' + numeroSecreto);
+} else {
+    alert('❌ ¡Incorrecto! El numero era ' + numeroSecreto);
+}
