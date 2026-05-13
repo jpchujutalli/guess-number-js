@@ -14,14 +14,13 @@ console.log('Elementos conectados:', inputIntento, btnAdivinar, mensaje, contado
 
 
 // --- Tu primera funcion ---
-function mostrarMensaje(texto, color, letra) {
+function mostrarMensaje(texto, color) {
     mensaje.textContent = texto;
     mensaje.style.color = color;
-    mensaje.style.fontSize = letra;
 }
 
 // Prueba la funcion
-mostrarMensaje('¡Bienvenido al juego!', '#e94560', '36px');
+mostrarMensaje('¡Bienvenido al juego!', '#e94560');
 
 
 // --- Variables del juego ---
@@ -39,7 +38,7 @@ function verificarIntento() {
 
     // Validar entrada
     if (isNaN(valor) || valor < 1 || valor > 100) {
-        mostrarMensaje('⚠️ Ingresa un número del 1 al 100', 'orange', '36px');
+        mostrarMensaje('⚠️ Ingresa un número del 1 al 100', 'orange');
         return
     }
     
@@ -53,16 +52,18 @@ function verificarIntento() {
 
     // Comparar con el numero secreto
     if (valor === numeroSecreto) {
-        mostrarMensaje('🎉 ¡Correcto! Era el ' + numeroSecreto, '#00ff88', '36px');
+        mostrarMensaje('🎉 ¡Correcto! Era el ' + numeroSecreto, '#00ff88');
         btnAdivinar.disabled = true;
         btnReiniciar.style.display = 'inline-block';
         // Celebracion visual: la tarjeta brilla verde
         tarjeta.style.borderColor = '#00ff88';
         tarjeta.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.3)';
     } else if (valor > numeroSecreto) {
-        mostrarMensaje('📈 Muy alto. Intenta más bajo.', '#ff6b6b', '36px');
+        let pista = obtenerPista(valor, numeroSecreto);
+        mostrarMensaje('📈 Muy alto. ' + pista, '#ff6b6b');
     } else {
-        mostrarMensaje('📉 Muy bajo. Intenta más alto.', '#4ecdc4', '36px');
+        let pista = obtenerPista(valor, numeroSecreto);
+        mostrarMensaje('📉 Muy bajo. ' + pista, '#4ecdc4');
     }
 
     // Limpiar input y enfocar
@@ -80,3 +81,45 @@ inputIntento.addEventListener('keypress', function(evento) {
         verificarIntento();
     }
 });
+
+
+// ---Reiniciaar juego---
+function reiniciarJuego() {
+    numeroSecreto = Math.floor(Math.random() *100) +1 ;
+    intentos = 0;
+    historialIntentos = [];
+
+    contador.textContent = 'Intentos: 0';
+    historial.textContent = 'Historial: ';
+    mostrarMensaje('🎯 ¡Nuevo juego! Adivina el número...', '#e94560');
+
+    btnAdivinar.disabled = false;
+    btnReiniciar.style.display = 'none';
+    inputIntento.value = '';
+    inputIntento.focus();
+
+    // Resetear celebracion visul
+    tarjeta.style.borderColor = 'rgba(233, 69, 96, 0.3)';
+    tarjeta.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+
+    console.log('(DEBUG) Nuevo número secreto:', numeroSecreto);
+}
+
+// --- COnectar boton reiniciar ---
+btnReiniciar.addEventListener('click', reiniciarJuego);
+
+// --- Pista de cercania ---
+function obtenerPista(intento, secreto) {
+    let diferencia = Math.abs(intento - secreto);
+
+    if (diferencia <= 5) {
+        return '🔥 ¡Muy cerca!';
+    } else if (diferencia <= 15) {
+        return '♨️ Caliente';
+    } else if (diferencia <= 30) {
+        return '🌤️ Tibio';
+    } else {
+        return '❄️ Frío';
+    }
+}
+
