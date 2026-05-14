@@ -10,14 +10,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    background: url(fondo.jpg);
     color: #eee;
     padding: 20px;
 }
 
 .game-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(233, 69, 96, 0.3);
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    border: 3px solid rgba(233, 69, 96, 0.3);
     border-radius: 20px;
     padding: 40px 30px;
     max-width: 420px;
@@ -27,6 +27,7 @@ body {
     transition:
         border-color 0.5s,
         box-shadow 0.5s;
+    opacity: 0.96;
 }
 
 h1 {
