@@ -44,11 +44,23 @@ function verificarIntento() {
     
     // Incrementar contador
     intentos++;
-    contador.textContent = 'Intentos: ' + intentos;
+    contador.textContent = 'Intentos: ' + intentos + ' / 10'; // Mostramos el límite
 
     // Agregar al historial 
     historialIntentos.push(valor);
-    historial.textContent = 'Historial: ' + historialIntentos.join(', ');
+    let color = valor > numeroSecreto ? '#ff6b6b' : valor < numeroSecreto ? '#4ecdc4' : '#00ff88';
+    const pildora = `<span class="guess-pill" style="
+        background: ${color}20; 
+        color: ${color}; 
+        border: 1px solid ${color};
+        padding: 5px 12px;
+        border-radius: 20px;
+        margin: 5px;
+        display: inline-block;
+        font-weight: bold;
+        box-shadow: 0 2px 10px ${color}30;
+    ">${valor}</span>`;
+    historial.innerHTML += pildora;
 
     // Comparar con el numero secreto
     if (valor === numeroSecreto) {
@@ -60,10 +72,12 @@ function verificarIntento() {
         tarjeta.style.boxShadow = '0 0 60px rgba(0, 255, 136, 0.3)';
     } else if (valor > numeroSecreto) {
         let pista = obtenerPista(valor, numeroSecreto);
+        tarjeta.style.borderColor = color; // Para que la tarjeta "reaccione" al error
         mostrarMensaje('📈 Muy alto. ' + pista, '#ff6b6b');
     } else {
         let pista = obtenerPista(valor, numeroSecreto);
         mostrarMensaje('📉 Muy bajo. ' + pista, '#4ecdc4');
+        tarjeta.style.borderColor = color; // Para que la tarjeta "reaccione" al error
     }
 
     // Limpiar input y enfocar
@@ -82,6 +96,13 @@ inputIntento.addEventListener('keypress', function(evento) {
     }
 });
 
+// --- Space tambien funciona ---
+inputIntento.addEventListener('keydown', function(evento){
+    if (evento.key === 'Spacebar' || evento.key === ' '){
+        reiniciarJuego();
+    }
+});
+
 
 // ---Reiniciaar juego---
 function reiniciarJuego() {
@@ -90,7 +111,7 @@ function reiniciarJuego() {
     historialIntentos = [];
 
     contador.textContent = 'Intentos: 0';
-    historial.textContent = 'Historial: ';
+    historial.innerHTML = '';
     mostrarMensaje('🎯 ¡Nuevo juego! Adivina el número...', '#e94560');
 
     btnAdivinar.disabled = false;
@@ -122,4 +143,3 @@ function obtenerPista(intento, secreto) {
         return '❄️ Frío';
     }
 }
-
