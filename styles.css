@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
+    font-family: "Roboto", Arial, sans-serif;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -33,12 +33,12 @@ body {
 h1 {
     color: #e94560;
     font-size: 1.8rem;
-    margin-bottom: 8px;
+    margin-bottom: 25px;
 }
 
 .subtitle {
     color: #aaa;
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
 
 .controls {
